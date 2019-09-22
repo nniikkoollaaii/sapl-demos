@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2017-2018 Dominic Heutelbeck (dheutelbeck@ftk.de)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License.  You may obtain a copy
  * of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
@@ -26,8 +26,13 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+
 import io.sapl.api.functions.FunctionException;
 import io.sapl.api.interpreter.PolicyEvaluationException;
+import io.sapl.api.pdp.Request;
+import io.sapl.api.pdp.Response;
 import io.sapl.api.pip.AttributeException;
 import io.sapl.pdp.embedded.EmbeddedPolicyDecisionPoint;
 
@@ -43,9 +48,23 @@ public class EmbeddedPDPDemo {
 			+ "The default path is 'classpath:policies'. The pattern will be extended by '/*.sapl' by the PDP/PRP. "
 			+ "So all files with the '.sapl' suffix will be loaded.";
 
-	private static final int RUNS = 100000;
-	private static final double BILLION = 1000000000.0D;
-	private static final double MILLION = 1000000.0D;
+	private static final String SUBJECT = "willi";
+
+	private static final String ACTION_READ = "read";
+
+	private static final String ACTION_WRITE = "write";
+
+	private static final String RESOURCE = "something";
+
+	private static final Request READ_REQUEST = buildRequest(SUBJECT, ACTION_READ,
+			RESOURCE);
+
+	private static final Request WRITE_REQUEST = buildRequest(SUBJECT, ACTION_WRITE,
+			RESOURCE);
+
+	private static final int RUNS = 25_000;
+	private static final double BILLION = 1_000_000_000.0D;
+	private static final double MILLION = 1_000_000.0D;
 
 	private static double nanoToMs(double nanoseconds) {
 		return nanoseconds / MILLION;
@@ -80,19 +99,32 @@ public class EmbeddedPDPDemo {
 
 	private static void runDemo(String path)
 			throws IOException, PolicyEvaluationException, AttributeException, FunctionException {
+		LOGGER.info("Performance...");
 		EmbeddedPolicyDecisionPoint pdp = new EmbeddedPolicyDecisionPoint(path);
+		pdp.importAttributeFindersFromPackage("io.sapl.demo");
+		pdp.importFunctionLibrariesFromPackage("io.sapl.demo");
+
+		final Response response = pdp.decide(READ_REQUEST);
+		LOGGER.info("{}", response);
+
+		int[] count = { 0 };
 		long start = System.nanoTime();
 		for (int i = 0; i < RUNS; i++) {
-			pdp.decide("willi", "read", "something");
-			// log.info("response: " + response.toString());
+			pdp.decide(READ_REQUEST);
+			count[0]++;
 		}
 		long end = System.nanoTime();
-		LOGGER.info("Start : {}", start);
-		LOGGER.info("End   : {}", end);
 		LOGGER.info("Runs  : {}", RUNS);
+		LOGGER.info("Count  : {}", count[0]);
 		LOGGER.info("Total : {}s", nanoToS((double) end - start));
-
 		LOGGER.info("Avg.  : {}ms", nanoToMs(((double) end - start) / RUNS));
+	}
+
+	private static Request buildRequest(Object subject, Object action, Object resource) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new Jdk8Module());
+		return new Request(mapper.valueToTree(subject), mapper.valueToTree(action),
+				mapper.valueToTree(resource), null);
 	}
 
 }
