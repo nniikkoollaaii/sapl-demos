@@ -1,0 +1,47 @@
+#content-view {
+	height: calc(100vh - var(--lumo-size-xl));
+}
+#dividePageHorizontal {
+	height: 100%;
+	width: 100%
+}
+#leftSide {
+	padding: 1em;
+	border-right: solid var(--lumo-contrast-60pct);
+	max-width: 45vw;
+}
+
+#content-view div {
+	width: 100%;
+}
+
+#rightSideVertical {
+	height: 100%;
+}
+
+#rightSideInputDiv {
+	height: 50%;
+	border-bottom: solid var(--lumo-contrast-60pct);
+}
+
+#jsonEditorDiv {
+	height: 90%;
+	max-width: 45vw;
+}
+
+#rightSideOutputDiv {
+	height: 50%;
+}
+
+#jsonOutputDiv {
+	height: 90%;
+	max-width: 45vw;
+}
+
+#xtext-editor {
+	height: 100%
+}
+
+.errorText {
+	color: red;
+}
