@@ -52,20 +52,10 @@
 
 	<repositories>
 		<repository>
-			<id>openconjurer-public</id>
-			<name>OpenConjurer Nexus Maven Release Repository</name>
-			<url>https://nexus.openconjurer.org/repository/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>openconjurer-public-snapshots</id>
-			<name>OpenConjurer Nexus Maven Snapshot Repository</name>
-			<url>https://nexus.openconjurer.org/repository/snapshots/</url>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
 			</snapshots>
 		</repository>
 	</repositories>
