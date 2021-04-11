@@ -1,46 +1,67 @@
 #content-view {
 	height: calc(100vh - var(--lumo-size-xl));
 }
-#dividePageHorizontal {
-	height: 100%;
-	width: 100%
-}
-#leftSide {
-	padding: 1em;
-	border-right: solid var(--lumo-contrast-60pct);
-	max-width: 45vw;
-}
 
 #content-view div {
 	width: 100%;
 }
 
+#dividePageHorizontal {
+	height: 100%;
+	width: 100%
+}
+#leftSide {
+	/*padding: 1em;*/
+	border-right: solid var(--lumo-contrast-60pct);
+	max-width: 45vw;
+	height: calc(100% - 1em);
+	padding: 0.5rem;
+}
+
+#leftSideContent {
+	/*margin: var(--lumo-space-m);*/
+}
+
+#saplEditorDiv {
+	height: 100%;
+	max-width: 45vw;
+}
+
+#mockInputHelpTextDiv {
+	height: calc(40vh - var(--lumo-size-l));
+	overflow: auto;
+}
+
+#mockInputHelpTextDiv p {
+	margin: 4px 0px 6px 0px;	
+}
+
 #rightSideVertical {
 	height: 100%;
+	padding: 0 !important;
 }
 
 #rightSideInputDiv {
-	height: 50%;
+	height: calc(50% - var(--lumo-space-m));
 	border-bottom: solid var(--lumo-contrast-60pct);
 }
 
-#jsonEditorDiv {
-	height: 90%;
+
+#rightSideInputDiv div {
+	height: calc(100% - var(--lumo-size-l) - 2em);
 	max-width: 45vw;
 }
 
+
 #rightSideOutputDiv {
-	height: 50%;
+	height: calc(50% - var(--lumo-space-m));
 }
 
 #jsonOutputDiv {
-	height: 90%;
+	height: calc(100% - 2em);;
 	max-width: 45vw;
 }
 
-#xtext-editor {
-	height: 100%
-}
 
 .errorText {
 	color: red;

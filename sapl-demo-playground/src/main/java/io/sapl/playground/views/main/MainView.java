@@ -1,13 +1,8 @@
 package io.sapl.playground.views.main;
 
 import java.util.Arrays;
-import java.util.Optional;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentUtil;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Anchor;
@@ -15,24 +10,15 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
-import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.TabVariant;
-import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.PWA;
-import com.vaadin.flow.theme.Theme;
 
 import io.sapl.playground.models.ExamplesEnum;
-import io.sapl.playground.views.content.ContentView;
-import io.sapl.playground.views.main.MainView;
 
 /**
  * The main view is a top-level placeholder for other views.
  */
+@SuppressWarnings("serial")
 @CssImport(value = "./styles/views/main/main-view.css", themeFor = "vaadin-app-layout")
 @CssImport("./styles/views/main/main-view.css")
 //@PWA(name = "SAPL Playground", shortName = "SAPL", enableInstallPrompt = false)
@@ -64,7 +50,7 @@ public class MainView extends AppLayout {
         Div buttons = new Div();
         buttons.setClassName("alignRight");
         
-        Anchor linkToDocs = new Anchor("https://sapl.io/sapl-reference.html", "Docs");
+        Anchor linkToDocs = new Anchor("https://sapl.io/docs/sapl-reference.html", "Docs");
         linkToDocs.setId("linkToDocsButton");
         buttons.add(linkToDocs);
         

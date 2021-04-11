@@ -20,6 +20,10 @@ $_documentContainer.innerHTML = `
 			--lumo-body-text-color: #f8f9fa;
 			--lumo-contrast-60pct: #f8f9fa;
 		}
+		
+		vaadin-tab[selected] {
+		    color: var(--lumo-contrast-90pct);
+		}
 	</style>
 </custom-style>
 

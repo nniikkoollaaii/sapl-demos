@@ -1,10 +1,16 @@
 package io.sapl.playground.models;
 
 public abstract class Example {
-
-	private String policy;
 	
-	private String authSub;
+	protected String mockDefinition;
+
+	protected String policy;
+	
+	protected String authSub;
+	
+	public String getMockDefinition() {
+		return this.mockDefinition;
+	}
 	
 	public String getPolicy() {
 		return this.policy;
@@ -12,13 +18,5 @@ public abstract class Example {
 	
 	public String getAuthSub() {
 		return this.authSub;
-	}
-	
-	public void setPolicy(String policy) {
-		this.policy = policy;
-	}
-	
-	public void setAuthSub(String authSub) {
-		this.authSub = authSub;
 	}
 }

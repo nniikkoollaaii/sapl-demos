@@ -137,10 +137,27 @@
             <scope>test</scope>
         </dependency>
         
+        
+    	<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+   		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		
         <!-- SAPL -->
    		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>sapl-editor-for-vaadin</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+   		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>sapl-test</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
